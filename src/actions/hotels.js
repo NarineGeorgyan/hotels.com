@@ -28,7 +28,7 @@ export const createHotel = async (token, data) =>
     },
   });
 
-export const updateHotel = async (token, data, hotelId) =>
+export const updateHotel = async (hotelId, data, token) =>
   await axios.put(
     `${import.meta.env.VITE_APP_API}/update-hotel/${hotelId}`,
     data,
@@ -52,18 +52,19 @@ export const deleteHotel = async (token, hotelId) =>
 export const searchListings = async (query) =>
   await axios.post(`${import.meta.env.VITE_APP_API}/search-listings`, query);
 
-
-  export const userHotelBookings = async (token) =>
+export const userHotelBookings = async (token) =>
   await axios.get(`${import.meta.env.VITE_APP_API}/user-hotel-bookings`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-
-  export const isAlreadyBooked = async (token, hotelId) =>
-  await axios.get(`${import.meta.env.VITE_APP_API}/is-already-booked/${hotelId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const isAlreadyBooked = async (token, hotelId) =>
+  await axios.get(
+    `${import.meta.env.VITE_APP_API}/is-already-booked/${hotelId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );

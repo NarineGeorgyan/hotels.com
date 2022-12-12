@@ -1,16 +1,18 @@
 import { useSelector } from 'react-redux';
 import moment from 'moment/moment';
-import {useState, useEffect} from "react";
+import { useState, useEffect } from 'react';
+import multiavatar from '@multiavatar/multiavatar/esm';
 
 // Bootstrap
-import { Card, Col } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
-import { FiSettings } from "react-icons/fi";
+import { FiSettings } from 'react-icons/fi';
 
-import { currencyFormatter, getAccountBalance, payoutSetting } from "../../actions/stripe";
-
+import {
+  currencyFormatter,
+  getAccountBalance,
+  payoutSetting,
+} from '../../actions/stripe';
 
 const UserInfo = () => {
   const { auth } = useSelector((state) => ({ ...state }));
@@ -23,7 +25,7 @@ const UserInfo = () => {
       // console.log("RES FOR PAYOUT SETTING LINK", res);
       window.location.href = res.data.url;
     } catch (err) {
-      console.log("Unable to access settings. Try again");
+      console.log('Unable to access settings. Try again');
     }
   };
 
@@ -37,12 +39,14 @@ const UserInfo = () => {
     <Container className="mt-4 mb-4">
       <Row>
         <Col ms={4} className="mb-2">
-          <Card body>
+          <div className="user-card">
             <div className="d-flex gap-3">
               <div>
                 <Image
-                  src={`https://via.placeholder.com/70x70?text=${user.name[0]}`}
-                  rounded
+                  src={`https://api.multiavatar.com/${user.name[0]}.svg`}
+                  className="rounded"
+                  width="100"
+                  height="100"
                 />
               </div>
               <div>
@@ -51,27 +55,35 @@ const UserInfo = () => {
                 <small>{`Joined ${moment(user.createdAt).fromNow()}`}</small>
               </div>
             </div>
-          </Card>
+          </div>
         </Col>
         {auth?.user?.stripe_seller?.charges_enabled && (
           <>
             <Col md={4} className="mb-2">
-              <Card body>Avaliable: {balance &&
-                  balance.pending &&
-                  balance.pending.map((bp, i) => (
-                    <span key={i} className="lead">
-                      {currencyFormatter(bp)}
-                    </span>
-                  ))}</Card>
-            
-              
+              <div className="user-card payment-image ">
+                <div className="d-flex justify-content-end align-items-center gap-1 ">
+                  <span className="h3 counter"> Account:</span>
+                  {balance &&
+                    balance.pending &&
+                    balance.pending.map((bp, i) => (
+                      <span key={i} className="text-dark p-4" c>
+                        {currencyFormatter(bp)}
+                      </span>
+                    ))}
+                </div>
+              </div>
             </Col>
             <Col md={4} className="mb-2">
-              <Card body>Payouts
-                <span onClick={handlePayoutSettings} className="bg-light pointer">
-                  <FiSettings className="h5 pt-2" />
+              <div className="user-card payout-card">
+                <span
+                  onClick={handlePayoutSettings}
+                  className="pointer counter h3 d-inline-block"
+                >
+                  {' '}
+                  Payouts:
+                  <FiSettings className="h3" />
                 </span>
-              </Card>
+              </div>
             </Col>
           </>
         )}
@@ -79,6 +91,5 @@ const UserInfo = () => {
     </Container>
   );
 };
-
 
 export default UserInfo;

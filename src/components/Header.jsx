@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavDropdown } from 'react-bootstrap';
-import { RadiusBottomrightOutlined } from '@ant-design/icons';
 
 const Header = () => {
   const { auth } = useSelector((state) => ({ ...state }));
@@ -54,12 +53,25 @@ const Header = () => {
               </Link>
             </>
             {auth && auth.token ? (
-              <NavDropdown align="end" className="" title={auth.user.name}>
-                <NavDropdown.Item as={Link} to="/dashboard/bookings">
-                  Dashboard
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
-              </NavDropdown>
+              <>
+                <div style={{ width: '35px', height: '35px' }}>
+                  <img
+                    src="	https://multiavatar.com/img/logo-animated.gif?v=003"
+                    alt="profileImage"
+                    className="w-100 h-100"
+                  />
+                </div>
+                <NavDropdown align="end">
+                  <NavDropdown.Item className="d-block  py-1 text-xs text-gray-400 b-1 ">
+                    {' '}
+                    {auth.user.name}
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/dashboard/bookings">
+                    Dashboard
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </>
             ) : (
               <>
                 <Link

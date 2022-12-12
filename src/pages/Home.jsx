@@ -2,20 +2,17 @@ import Hotels from '../components/Hotels';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Search from '../components/Search';
-import HomeBanner from "../components/banners/HomeBanner";
+import Carusel from '../components/Carusel';
 
 const Home = () => {
   return (
     <>
-    <HomeBanner />
-    <Container>
-      <Row>
+      <div className="position-relative">
+        <Carusel />
+
         <Search />
-      </Row>
-      <Row>
-        <Hotels />
-      </Row>
-    </Container>
+      </div>
+      <Hotels />
     </>
   );
 };

@@ -4,6 +4,11 @@
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: 'Trirong', serif;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  background-color: rgba(241, 212, 212, 0.6);
+}
 .bg-image {
   background: url('https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/62/09/03/aghababyan-s-hotel.jpg?w=700&h=-1&s=1')
     no-repeat center;
@@ -25,8 +30,11 @@
   z-index: 100;
   box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
 }
+
 .reg-nav:hover,
-.reg-nav:active {
+.reg-nav:active,
+.nav-link:hover,
+.nav-link:active {
   color: rgb(60, 170, 159) !important;
   text-decoration: underline !important;
 }
@@ -44,12 +52,31 @@
   margin-bottom: 7px;
   cursor: pointer;
 }
+
+.eye-icon {
+  position: absolute;
+  top: 0;
+  right: 20px;
+
+  margin-right: auto;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-size: 23px;
+}
 .social-icons svg {
   width: 25px;
   height: 25px;
   border-radius: 50%;
 }
-
+.layer {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.carousel-item img {
+  height: 450px;
+}
+.carousel-heading {
+  font-family: 'Sofia';
+}
 .vh-85 {
   height: 85vh;
 }
@@ -70,36 +97,120 @@
 .pointer {
   cursor: pointer;
 }
-
-.spinner-custom {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+.zIndex {
+  z-index: 1000 !important;
+}
+.modal-content {
+  background-color: rgba(239, 27, 27, 0.7);
 }
 
-/* Home Banner */
-
-.home-banner {
-  position: relative;
-  background-color: black;
-  margin-bottom: 30px;
-  /* background-image: linear-gradient(90deg, black, white, black); */
-  background-image: url('');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
-  height: 400px;
+.card {
+  box-shadow: 0 1px 8px #a4a0a0;
+  height: 550px !important;
   overflow: hidden;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  color: #656565;
 }
-.home-banner img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.card-title {
+  font-weight: 900;
+  text-align: center;
 }
-.center-white-gradient {
-  position: absolute;
+.hotel-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-card {
+  box-shadow: 0 1px 8px #a4a0a0;
+  height: 150px !important;
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  background-image: linear-gradient(45deg, green, transparent, black);
+  border-radius: 19px;
+  color: #656565;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(238, 238, 238);
+}
+
+.card-text svg {
+  margin-right: 8px;
+}
+.mr-2 {
+  margin-right: 12px;
+}
+.footer {
+  padding: 10px 40px;
+}
+
+.app {
+  background-image: url('https://chessify.me/dg_static/website/assets/images/app_store.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 8.125rem;
+  height: 2.5rem;
+}
+.google {
+  background-image: url('https://chessify.me/dg_static/website/assets/images/google_play.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 8.125rem;
+  height: 2.5rem;
+}
+.search-container {
+  background-color: rgb(238, 238, 238);
+  padding: 50px 30px;
+  position: absolute;
+  bottom: 0;
+  left: 97px;
+  margin-bottom: -120px;
+  z-index: 1000;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px #a4a0a0;
+}
+.search-container input,
+.search-container select {
+  border: none;
+}
+.active .page-link {
+  background-color: black;
+}
+.payment-image {
+  background: url('https://ucarecdn.com/1ff7733b-44ce-4fd5-86c5-579da82ec461/')
+    no-repeat left top;
+  background-size: 65%;
+  font-weight: 900;
+  color: rgb(202, 197, 191);
+  justify-content: flex-end;
+}
+.edit-image {
+  background: url('https://img.i-scmp.com/cdn-cgi/image/fit=contain,width=425,format=auto/sites/default/files/styles/768x768/public/d8/images/canvas/2022/07/22/59bc4f58-9b2c-47f1-b31b-7d46cfeb0c9c_7637eda1.jpg?itok=QBXgYY5g&v=1658468751')
+    no-repeat no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 200px;
+}
+.payout-card {
+  background: url('https://blogs.sap.com/wp-content/uploads/2020/05/web-icon-1-1.png')
+    no-repeat center;
+  background-size: cover;
+  font-weight: 900;
+  color: rgb(202, 197, 191);
+  justify-content: space-around;
+}
+
+.counter {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 15px;
+  max-width: 200px;
+}
+.b-1 {
+  border-bottom: 2px solid black;
+}
+.price {
+  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.6)) center
+    no-repeat;
+  padding: 10px 20px;
+  top: 14rem;
+  right: 0;
 }

@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 import { DatePicker } from 'antd';
 import ReactGoogleAutocomplete from 'react-google-autocomplete';
+import useLoader from '../../hook/useLoader';
+import Notification from '../../components/Notification';
 const { RangePicker } = DatePicker;
 
 const initialState = {
@@ -63,9 +65,19 @@ const AddHotel = () => {
   };
   return (
     <>
-      <pre>{JSON.stringify(values)}</pre>
-      <div className="container-fluid bg-secondary p-5 text-center">
-        <h2>Add Hotel</h2>
+      <div className="container-fluid bg-secondary p-5 text-center edit-image ">
+        <h2
+          style={{
+            fontFamily: 'Sofia',
+            letterSpacing: '3px',
+            border: '5px solid white',
+            padding: '5px 10px',
+            fontWeight: '900',
+          }}
+          className="text-white"
+        >
+          Add Hotel
+        </h2>
       </div>
 
       <Container className="mt-4 mb-4">
@@ -110,12 +122,6 @@ const AddHotel = () => {
 
               <Form.Group className="mb-3">
                 <Form.Label>Loaction</Form.Label>
-                {/* <Form.Control
-                  name="location"
-                  type="text"
-                  value={values.location}
-                  onChange={handleChange}
-                /> */}
 
                 <ReactGoogleAutocomplete
                   placeholder=""
@@ -164,8 +170,8 @@ const AddHotel = () => {
                 format="YYYY-MM-DD"
               />
               <div>
-                <Button variant="primary" type="submit">
-                  Save
+                <Button variant="dark w-100" type="submit">
+                  Add Hotel
                 </Button>
               </div>
             </Form>

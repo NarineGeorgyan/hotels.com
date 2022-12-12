@@ -7,25 +7,23 @@ import { BiBed, BiCalendarAlt } from 'react-icons/bi';
 import { GoLocation } from 'react-icons/go';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux';
-import { getSessionId } from "../../actions/stripe";
-import { loadStripe } from "@stripe/stripe-js";
+import { getSessionId } from '../../actions/stripe';
+import { loadStripe } from '@stripe/stripe-js';
 
 const SingleHotel = () => {
   const navigate = useNavigate();
   const params = useParams();
-  
+
   const { auth } = useSelector((state) => ({ ...state }));
 
   const [hotel, setHotel] = useState({});
   const [alreadyBooked, setAlreadyBooked] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
   const getSingleHotel = async () => {
     try {
       const res = await getHotelById(params.id);
       if (res.data) {
-        console.log(res.data)
         setHotel(res.data);
       }
     } catch (err) {
@@ -37,7 +35,7 @@ const SingleHotel = () => {
     e.preventDefault();
 
     if (!auth || !auth.token) {
-      navigate("/login")
+      navigate('/login');
       return;
     }
 
@@ -46,17 +44,17 @@ const SingleHotel = () => {
     // console.log(auth.token, match.params.hotelId);
 
     console.log(auth.token, params.id);
-    
+
     let res = await getSessionId(auth.token, params.id);
-    console.log("get sessionid resposne", res.data.sessionId);
+    console.log('get sessionid resposne', res.data.sessionId);
 
     const stripe = await loadStripe(`${import.meta.env.VITE_APP_STRIPE_KEY}`);
-    
+
     stripe
       .redirectToCheckout({
         sessionId: res.data.sessionId,
       })
-     .then((result) => console.log("Shitak e)) ", result));
+      .then((result) => console.log('Shitak e)) ', result));
   };
 
   useEffect(() => {
@@ -66,7 +64,7 @@ const SingleHotel = () => {
   useEffect(() => {
     if (auth && auth.token) {
       isAlreadyBooked(auth.token, params.id).then((res) => {
-        // if (res.data.ok) 
+        // if (res.data.ok)
         setAlreadyBooked(true);
       });
     }
@@ -76,9 +74,7 @@ const SingleHotel = () => {
     <>
       {Object.keys(hotel).length && (
         <Container className="mt-4">
-          <h1>
-          {alreadyBooked}
-          </h1>
+          <h1>{alreadyBooked}</h1>
           <Row>
             <Col md={6}>
               <img
@@ -91,33 +87,34 @@ const SingleHotel = () => {
               <h2>{hotel.title}</h2>
               <p>{hotel.content}</p>
               <p>
-                <GoLocation />
+                <GoLocation className="mr-2" />
                 {hotel.location}
               </p>
               <p>
-                <BiCalendarAlt />
+                <BiCalendarAlt className="mr-2" />
                 for {diffDays(hotel.from, hotel.to)}{' '}
                 {diffDays(hotel.from, hotel.to) <= 1 ? ' day' : ' days'}
               </p>
               <p>
-                <BiBed />
+                <BiBed className="mr-2" />
                 {hotel.bed}
               </p>
               <p>Available from {new Date(hotel.from).toLocaleDateString()}</p>
-              
-              <Button disabled={loading || alreadyBooked} variant="primary" className="mb-3" onClick={handleBooking}>
-                {
-                  loading
-                  ? "Loading..."
-                  : alreadyBooked
-                  ? "Already Booked"
-                  : auth && auth.token
-                  ? "Book Now"
-                  : "Login to Book"
-                }
-              </Button>
 
-             
+              <Button
+                disabled={loading || alreadyBooked}
+                variant="primary"
+                className="mb-3"
+                onClick={handleBooking}
+              >
+                {loading
+                  ? 'Loading...'
+                  : alreadyBooked
+                  ? 'Already Booked'
+                  : auth && auth.token
+                  ? 'Book Now'
+                  : 'Login to Book'}
+              </Button>
             </Col>
           </Row>
         </Container>

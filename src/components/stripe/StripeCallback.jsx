@@ -15,7 +15,6 @@ const StripeCallback = () => {
   const accountStatus = async () => {
     try {
       const res = await getAccountStatus(auth.token);
-      console.log(res);
 
       updateUserInLocalStorage(res.data, () => {
         // update user in redux
@@ -26,9 +25,7 @@ const StripeCallback = () => {
         // redirect user to dashboard
         window.location.href = '/dashboard/seller';
       });
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   };
 
   return (

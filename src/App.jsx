@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+
 // ####
 import PrivateRoute from './components/PrivateRoute';
 // Components
@@ -25,7 +25,6 @@ import StripeCancel from './components/stripe/StripeCancel';
 const App = () => {
   return (
     <>
-      <ToastContainer />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -33,6 +32,7 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/hotels/:id" element={<SingleHotel />} />
         <Route
           path="/dashboard"
           element={
@@ -44,7 +44,7 @@ const App = () => {
           <Route path="/dashboard/bookings" element={<Bookings />} />
           <Route path="/dashboard/seller" element={<Seller />} />
         </Route>
-        <Route path="/hotels/:id" element={<SingleHotel />} />
+      
         <Route
           path="/hotels/new"
           element={

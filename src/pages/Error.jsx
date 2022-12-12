@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../components/Loader';
 
 const Error = () => {
   return (
@@ -8,6 +9,7 @@ const Error = () => {
         <h2 className="h1">❌</h2>
         <p className="text-muted">Page is not found!</p>
       </div>
+      <Loader />
     </div>
   );
 };
